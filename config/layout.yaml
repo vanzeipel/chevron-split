@@ -1,0 +1,95 @@
+units:
+  tm: 0.5         # thumb margin
+  cp: u/4         # cutout padding
+  ta: 14.036      # angle of thumbcluser
+  tu: 0.970143u   # 1u * cos(ta)
+  tu_m: 0.121268u # 0.125 * cos(ta)
+  tu_p: 0.545705u # 0.5 * cos(ta)
+points:
+  key:
+    tags:
+      1u: true
+  zones:
+    matrix:
+      columns:
+        outer:
+          origin: [-12, -19]
+        pinky:
+          stagger: u/4
+        ring:
+          stagger: u/4
+        middle:
+          stagger: u/4
+        index:
+          stagger: -u/4
+        inner:
+          stagger: -u/4
+      rows:
+        bottom:
+        home:
+        top:
+    thumbcluster:
+      anchor:
+        ref: matrix_index_bottom
+        shift: [-3.5, -26]
+        rotate: -ta
+      columns:
+        near:
+        home:
+          spread: 1u + tm
+        far:
+          spread: 1u + tm
+      rows:
+        thumb:
+          tags:
+            1u: false
+            15u: true
+outlines:
+  exports:
+    raw:
+      - type: polygon
+        points:
+          - ref: matrix_outer_top
+            shift: [-0.5u - cp, 0.5u + cp]
+          - ref: matrix_middle_top
+            shift: [0, 0.5u + cp + 3u/16]
+          - ref: thumbcluster_far_thumb
+            shift: [0.5u + cp, 0.75u + 3tu + 2tu_m + tu_p]
+          - ref: thumbcluster_far_thumb
+            shift: [0.5u + cp, -0.75u - cp]
+          - ref: thumbcluster_near_thumb
+            shift: [-0.5u - cp, -0.75u - cp]
+          - ref: thumbcluster_near_thumb
+            shift: [-0.5u - cp, 0]
+          - ref: matrix_ring_bottom
+            shift: [0, -0.5u - cp - 3u/16]
+          - ref: matrix_outer_bottom
+            shift: [-0.5u - cp, -0.5u - cp - 6u/16]
+      - type: keys
+        operation: subtract
+        side: left
+        size: 18
+        tags: [1u]
+      - type: keys
+        operation: subtract
+        side: left
+        size: [18, 27]
+        tags: [15u]
+    keycaps:
+      - type: keys
+        side: left
+        size: [18, 18] #mx keycaps are 18mm x 18mm
+        bound: false
+        tags: [1u]
+    thumbkeycaps:
+      - type: keys
+        side: left
+        size: [18, 27] #mx 1.5u
+        bound: false
+        tags: [15u]
+    cutout:
+      - type: outline
+        name: raw
+        fillet: u/4
+    preview:
+      [keycaps, thumbkeycaps]
