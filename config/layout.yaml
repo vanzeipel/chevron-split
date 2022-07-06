@@ -1,44 +1,67 @@
 units:
-  tm: 0.5         # thumb margin
-  cp: u/4         # cutout padding
-  ta: 14.036      # angle of thumbcluser
-  tu: 0.970143u   # 1u * cos(ta)
-  tu_m: 0.121268u # 0.125 * cos(ta)
-  tu_p: 0.545705u # 0.5 * cos(ta)
+  # stagger angle: 1/4 = 14.036 degrees, tan^-1(1/4)
+  key_stagger: 0.25u    # columns stagger by a fixed amount based on key unit (u)
+  key_slope: 0.25       # column stagger expressed as a ratio (1/4)
+  angle_stagger: 14.036 # 1/4 stagger is 14.036 degrees
+  cos_stagger: 0.9701   # cos(14.036)
+  sin_stagger: 0.2425   # sin(14.036)
+  # board margins and padding
+  mar_thumb: 0.5  # thumb cluster spacing (between keycaps)
+  pad_edge: 5     # padding between the edge of the keycap and the edge of the board
+  rad_inner: 1    # inside corner radius
+  # keycap and switch sizes
+  mx_caps: 18     # 18mm x 18mm
+  mx_switch: 14   # mx switch footprint is 14mm (as it applies to switch plates)
+  # thumb cluster adjustments, because the thumbcluster is pitched at 14.036 degrees
+  tu: 0.9701u     # 1u shifted by the angle = 1u * cos(14.036)
+  tu_m: 0.1213u   # 1/8u * cos(14.036)
+  tu_p: 0.5457u   # 1/2u * cos(14.036)
+  # hardware dimensions
+  screw_ring: 0.8 # M1.6 screw is 1.6mm in diameter (circle of 0.8mm radius)
 points:
   key:
+    footprints:
+      mx_hotswap:
+        type: mx
+        params:
+          hotswap: true
+          reverse: true
+          keycaps: true
     tags:
       1u: true
   zones:
     matrix:
+      rows:
+        lower:
+        home:
+        upper:
+        number:
+          tags:
+            numbers: true
       columns:
         outer:
-          origin: [-12, -19]
+          rows:
+            number:
+              skip: true
         pinky:
-          stagger: u/4
+          stagger: key_stagger
         ring:
-          stagger: u/4
+          stagger: key_stagger
         middle:
-          stagger: u/4
+          stagger: key_stagger
         index:
-          stagger: -u/4
+          stagger: -key_stagger
         inner:
-          stagger: -u/4
-      rows:
-        bottom:
-        home:
-        top:
+          stagger: -key_stagger
     thumbcluster:
       anchor:
-        ref: matrix_index_bottom
-        shift: [-3.5, -26]
-        rotate: -ta
+        ref: matrix_index_lower
+        shift: [7, -27.5]
+        rotate: -angle_stagger
       columns:
         near:
         home:
-          spread: 1u + tm
         far:
-          spread: 1u + tm
       rows:
         thumb:
           tags:
@@ -46,50 +69,316 @@ points:
             15u: true
 outlines:
   exports:
-    raw:
+    _ref_thumb_rect:
+      - type: rectangle
+        size: [6u, (3u + pad_edge)/cos_stagger]
+        anchor:
+          ref: thumbcluster_far_thumb
+          shift: [-5.25u, 0.75u - pad_edge]
+    _ref_matrix_rect:
+      - type: rectangle
+        size: [5u, (3u + 2*pad_edge)/cos_stagger]
+        anchor:
+          ref: matrix_ring_home
+          orient: angle_stagger
+          shift: [-2.5u, (-1.5u - pad_edge)/cos_stagger]
+    _case_outer_radius:
+      - type: circle
+        radius: pad_edge
+        anchor:
+          ref: matrix_outer_upper
+          shift: [-0.5u, 0.5u]
+      - type: circle
+        radius: pad_edge
+        anchor:
+          ref: thumbcluster_far_thumb
+          shift: [0.5u, 3.75u/cos_stagger]
+      - type: circle
+        radius: pad_edge
+        anchor:
+          ref: thumbcluster_far_thumb
+          shift: [0.5u, -0.75u]
+      - type: circle
+        radius: pad_edge
+        anchor:
+          ref: thumbcluster_near_thumb
+          shift: [-0.5u, -0.75u]
+      - type: circle
+        radius: pad_edge
+        anchor:
+          ref: matrix_outer_lower
+          shift: [-0.5u, -0.75u]
       - type: polygon
         points:
-          - ref: matrix_outer_top
-            shift: [-0.5u - cp, 0.5u + cp]
-          - ref: matrix_middle_top
-            shift: [0, 0.5u + cp + 3u/16]
+          - ref: matrix_outer_upper
+            shift: [-0.5u - pad_edge, 0.5u]
+          - ref: matrix_outer_upper
+            shift: [-0.5u - pad_edge*sin_stagger, 0.5u + pad_edge*cos_stagger]
+          - ref: matrix_middle_upper
+            shift: [0, 0.5u + 0.125u + pad_edge]
           - ref: thumbcluster_far_thumb
-            shift: [0.5u + cp, 0.75u + 3tu + 2tu_m + tu_p]
+            shift: [0.5u, 3.75u/cos_stagger + pad_edge]
           - ref: thumbcluster_far_thumb
-            shift: [0.5u + cp, -0.75u - cp]
+            shift: [0.5u + pad_edge, 3.75u/cos_stagger]
+          - ref: thumbcluster_far_thumb
+            shift: [0.5u + pad_edge, -0.75u]
+          - ref: thumbcluster_far_thumb
+            shift: [0.5u, -0.75u - pad_edge]
           - ref: thumbcluster_near_thumb
-            shift: [-0.5u - cp, -0.75u - cp]
+            shift: [-0.5u, -0.75u - pad_edge]
           - ref: thumbcluster_near_thumb
-            shift: [-0.5u - cp, 0]
-          - ref: matrix_ring_bottom
-            shift: [0, -0.5u - cp - 3u/16]
-          - ref: matrix_outer_bottom
-            shift: [-0.5u - cp, -0.5u - cp - 6u/16]
-      - type: keys
+            shift: [-0.5u - pad_edge, -0.75u]
+          - ref: thumbcluster_near_thumb
+            shift: [-0.5u - pad_edge, 8.7 - rad_inner]
+          - ref: thumbcluster_near_thumb
+            shift: [-0.5u - pad_edge - rad_inner, 8.7]
+          - ref: matrix_middle_lower
+            shift: [0, -0.6125u - pad_edge/cos_stagger]
+          - ref: matrix_outer_lower
+            shift: [-0.5u + (pad_edge*sin_stagger), -0.75u - (pad_edge*cos_stagger)]
+          - ref: matrix_outer_lower
+            shift: [-0.5u - pad_edge, -0.75u]
+      - type: circle
         operation: subtract
-        side: left
-        size: 18
-        tags: [1u]
-      - type: keys
+        radius: rad_inner
+        anchor:
+          ref: thumbcluster_near_thumb
+          shift: [-0.5u - pad_edge - rad_inner, 8.7 - rad_inner]
+    _case_inner_radius:
+      - type: circle
+        radius: rad_inner
+        anchor:
+          ref: matrix_outer_upper
+          shift: [-0.5u, 0.5u]
+      - type: circle
+        radius: rad_inner
+        anchor:
+          ref: thumbcluster_far_thumb
+          shift: [0.5u, 3.75u/cos_stagger]
+      - type: circle
+        radius: rad_inner
+        anchor:
+          ref: thumbcluster_far_thumb
+          shift: [0.5u, -0.75u]
+      - type: circle
+        radius: rad_inner
+        anchor:
+          ref: thumbcluster_near_thumb
+          shift: [-0.5u, -0.75u]
+      - type: circle
+        radius: rad_inner
+        anchor:
+          ref: matrix_outer_lower
+          shift: [-0.5u, -0.75u]
+      - type: polygon
+        points:
+          - ref: matrix_outer_upper
+            shift: [-0.5u - rad_inner, 0.5u]
+          - ref: matrix_outer_upper
+            shift: [-0.5u - rad_inner*sin_stagger, 0.5u + rad_inner*cos_stagger]
+          - ref: matrix_middle_upper
+            shift: [0, 0.5u + 0.125u + rad_inner]
+          - ref: thumbcluster_far_thumb
+            shift: [0.5u, 3.75u/cos_stagger + rad_inner]
+          - ref: thumbcluster_far_thumb
+            shift: [0.5u + rad_inner, 3.75u/cos_stagger]
+          - ref: thumbcluster_far_thumb
+            shift: [0.5u + rad_inner, -0.75u]
+          - ref: thumbcluster_far_thumb
+            shift: [0.5u, -0.75u - rad_inner]
+          - ref: thumbcluster_near_thumb
+            shift: [-0.5u, -0.75u - rad_inner]
+          - ref: thumbcluster_near_thumb
+            shift: [-0.5u - rad_inner, -0.75u]
+          - ref: thumbcluster_near_thumb
+            shift: [-0.5u - rad_inner, 8.7 - rad_inner]
+          - ref: thumbcluster_near_thumb
+            shift: [-0.5u - pad_edge - rad_inner, 8.7 + pad_edge - rad_inner]
+          - ref: matrix_middle_lower
+            shift: [pad_edge*sin_stagger, -12.975]
+          - ref: matrix_middle_lower
+            shift: [-pad_edge*sin_stagger, -12.975]
+          - ref: matrix_outer_lower
+            shift: [-0.5u + (rad_inner*sin_stagger), -0.75u - (rad_inner*cos_stagger)]
+          - ref: matrix_outer_lower
+            shift: [-0.5u - rad_inner, -0.75u]
+      - type: circle
         operation: subtract
-        side: left
-        size: [18, 27]
-        tags: [15u]
-    keycaps:
+        radius: pad_edge
+        anchor:
+          ref: thumbcluster_near_thumb
+          shift: [-0.5u - pad_edge - rad_inner, 8.7 - rad_inner]
+      - type: circle
+        operation: subtract
+        radius: pad_edge
+        anchor:
+          ref: matrix_middle_lower
+          shift: [0, -0.6125u - (pad_edge + rad_inner)/cos_stagger]
+    _keys_numbers:
       - type: keys
+        operation: add
         side: left
-        size: [18, 18] #mx keycaps are 18mm x 18mm
-        bound: false
-        tags: [1u]
-    thumbkeycaps:
-      - type: keys
-        side: left
-        size: [18, 27] #mx 1.5u
-        bound: false
-        tags: [15u]
-    cutout:
+        size: u + 2*rad_inner
+        tags: [numbers]
+    _case_cover_plate:
+      - type: polygon
+        points:
+          - ref: matrix_inner_upper
+            shift: [0.5u + rad_inner, 0.5u + 2*rad_inner]
+          - ref: thumbcluster_far_thumb
+            shift: [0.5u + 2*rad_inner, (3.75u + 2*rad_inner)/cos_stagger]
+          - ref: thumbcluster_far_thumb
+            shift: [0.5u + 2*rad_inner, 0.75u + rad_inner]
+          - ref: matrix_inner_lower
+            shift: [0.5u + rad_inner, -0.5u - 0.5u * key_slope - rad_inner]
+    _holes_ring:
+      - type: circle
+        radius: screw_ring
+        anchor:
+          ref: matrix_outer_upper
+          shift: [0, 0.5u + 1.25*pad_edge + 0.0625u - (pad_edge - rad_inner)/2]
+      - type: circle
+        radius: screw_ring
+        anchor:
+          ref: matrix_inner_upper
+          shift: [1u, 0.25u + 1.25*pad_edge + 0.0625u - (pad_edge - rad_inner)/2]
+      - type: circle
+        radius: screw_ring
+        anchor:
+          ref: thumbcluster_far_thumb
+          shift: [0, 3.75u/cos_stagger + 0.5*(pad_edge + rad_inner)]
+      - type: circle
+        radius: screw_ring
+        anchor:
+          ref: thumbcluster_far_thumb
+          shift: [0, -0.75u - 0.5*(pad_edge + rad_inner)]
+      - type: circle
+        radius: screw_ring
+        anchor:
+          ref: thumbcluster_near_thumb
+          shift: [0, -0.75u - 0.5*(pad_edge + rad_inner)]
+      - type: circle
+        radius: screw_ring
+        anchor:
+          ref: matrix_ring_lower
+          shift: [0, -0.625u - 0.5*(pad_edge + rad_inner)]
+      - type: circle
+        radius: screw_ring
+        anchor:
+          ref: matrix_outer_lower
+          shift: [0, -0.625u - 0.5*(pad_edge + rad_inner)]
+    _holes_ring_bot:
+      - type: circle
+        radius: screw_ring
+        anchor:
+          ref: matrix_ring_upper
+          shift: [0, 0.5u + 1.25*pad_edge + 0.0625u - (pad_edge - rad_inner)/2]
+      - type: circle
+        radius: screw_ring
+        anchor:
+          ref: matrix_index_upper
+          shift: [0, 0.5u + 1.25*pad_edge + 0.0625u - (pad_edge - rad_inner)/2]
+    _case_top:
       - type: outline
-        name: raw
-        fillet: u/4
-    preview:
-      [keycaps, thumbkeycaps]
+        name: _case_outer_radius
+      - type: outline
+        name: _case_inner_radius
+        operation: subtract
+      - type: outline
+        name: _keys_numbers
+        operation: subtract
+    _case_cover:
+      - type: outline
+        name: _case_top
+      - type: outline
+        name: _keys_numbers
+        operation: subtract
+      - type: outline
+        name: _case_cover_plate
+        operation: add
+    _case_mid:
+      - type: outline
+        name: _case_outer_radius
+      - type: outline
+        name: _case_inner_radius
+        operation: subtract
+    _plate:
+      - type: outline
+        name: _case_outer_radius
+      - type: outline
+        name: _keys_numbers
+        operation: add
+    _plate_outline:
+      - type: outline
+        name: _plate
+        fillet: 2
+    _switches:
+      - type: keys
+        side: left
+        size: mx_switch
+        bound: false
+    _keycaps_matrix:
+      - type: keys
+        side: left
+        size: mx_caps
+        bound: false
+        tags: [1u]
+    _keycaps_thumbcluster:
+      - type: keys
+        side: left
+        size: [mx_caps, 1.5 * mx_caps] # 1.5u keys for thumb cluster
+        bound: false
+        tags: [15u]
+    case_top_ring:
+      - type: outline
+        name: _case_top
+        fillet: 1
+    case_top_cover:
+      - type: outline
+        name: _case_cover
+        fillet: 1
+      - type: outline
+        name: _holes_ring
+        operation: subtract
+    case_mid_ring:
+      - type: outline
+        name: _case_top
+        fillet: 1
+      - type: outline
+        name: _holes_ring
+        operation: subtract
+    case_bot_ring:
+      - type: outline
+        name: _case_mid
+        fillet: 1
+      - type: outline
+        name: _holes_ring
+        operation: subtract
+      - type: outline
+        name: _holes_ring_bot
+        operation: subtract
+    case_bot_plate:
+      - type: outline
+        name: _case_outer_radius
+        fillet: 1
+      - type: outline
+        name: _holes_ring
+        operation: subtract
+      - type: outline
+        name: _holes_ring_bot
+        operation: subtract
+    switchplate:
+      - type: outline
+        name: _plate
+        fillet: 1
+      - type: outline
+        name: _switches
+        operation: subtract
+        fillet: 0.5
+      - type: outline
+        name: _holes_ring
+        operation: subtract
+    preview_keycaps:
+      - case_top_ring
+      - ^_keycaps_matrix
+      - ^_keycaps_thumbcluster
