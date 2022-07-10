@@ -17,7 +17,15 @@ units:
   tu_m: 0.1213u   # 1/8u * cos(14.036)
   tu_p: 0.5457u   # 1/2u * cos(14.036)
   # hardware dimensions
-  screw_ring: 0.8 # M1.6 screw is 1.6mm in diameter (circle of 0.8mm radius)
+  screw_ring: 0.8      # M1.6 screw is 1.6mm in diameter (circle of 0.8mm radius)
+  mcu_width: 17.78     # Elite-C footprint is 0.70" in width
+  mcu_height: 33.02    # Elite-C footprint is 1.30" in height
+  mcu_port: 34.544     # Elite-C with USB port is 1.37" from edge to edge
+  mcu_offset_y: 19.304 # Elite-C footprint offset from top edge
+  trrs_width: 6.1      # TRRS jack footprint width
+  trrs_height: 12.1    # TRRS jack footprint length
+  trrs_port: 2         # TRRS jack overhang from edge of footprint
+  trrs_offset_x: 0.75  # TRRS footprint offset from top-right corner (not including port overhang)
 points:
   key:
     footprints:
@@ -27,32 +35,58 @@ points:
           hotswap: true
           reverse: true
           keycaps: true
+        nets:
+          from: =colrow
+          to: =col_net
+      diode:
+        type: diode
+        nets:
+          from: =colrow
+          to: =row_net
+        anchor:
+          shift: [0, -5]
     tags:
       1u: true
   zones:
     matrix:
       rows:
         lower:
+          row_net: P7
         home:
+          row_net: P6
         upper:
+          row_net: P5
         number:
+          row_net: P4
           tags:
             numbers: true
       columns:
         outer:
+          key:
+            col_net: P20
           rows:
             number:
               skip: true
         pinky:
           stagger: key_stagger
+          key:
+            col_net: P19
         ring:
           stagger: key_stagger
+          key:
+            col_net: P18
         middle:
           stagger: key_stagger
+          key:
+            col_net: P17
         index:
           stagger: -key_stagger
+          key:
+            col_net: P16
         inner:
           stagger: -key_stagger
+          key:
+            col_net: P15
     thumbcluster:
       anchor:
         ref: matrix_index_lower
@@ -60,10 +94,17 @@ points:
         rotate: -angle_stagger
       columns:
         near:
+          key:
+            col_net: P17
         home:
+          key:
+            col_net: P16
         far:
+          key:
+            col_net: P15
       rows:
         thumb:
+          row_net: P8
           tags:
             1u: false
             15u: true
@@ -312,6 +353,12 @@ outlines:
       - type: outline
         name: _plate
         fillet: 2
+    _pcb_outline:
+      - type: outline
+        name: _plate_outline
+      - type: outline
+        name: _holes_ring
+        operation: subtract
     _switches:
       - type: keys
         side: left
@@ -382,3 +429,31 @@ outlines:
       - case_top_ring
       - ^_keycaps_matrix
       - ^_keycaps_thumbcluster
+pcbs:
+  chevron-split:
+    outlines:
+      edge:
+        outline: _pcb_outline
+        layer: Edge.Cuts
+    footprints:
+      mcu:
+        type: promicro
+        params:
+          orientation: down
+        anchor:
+          ref: thumbcluster_far_thumb
+          shift: [0.5u - trrs_width - 7.02 - mcu_width/2, 3.75u/cos_stagger + pad_edge - mcu_offset_y]
+          rotate: -90
+      trrs:
+        type: trrs
+        params:
+          reverse: true
+          symmetric: true
+        nets:
+          A: GND
+          B: GND
+          C: P2
+          D: VCC
+        anchor:
+          ref: thumbcluster_far_thumb
+          shift: [0.5u - trrs_offset_x, 3.75u/cos_stagger + pad_edge - trrs_port]
