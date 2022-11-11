@@ -51,42 +51,42 @@ points:
     matrix:
       rows:
         lower:
-          row_net: P7
+          row_net: P18
         home:
-          row_net: P6
+          row_net: P19
         upper:
-          row_net: P5
+          row_net: P20
         number:
-          row_net: P4
+          row_net: P21
           tags:
             numbers: true
       columns:
         outer:
           key:
-            col_net: P20
+            col_net: P4
           rows:
             number:
               skip: true
         pinky:
           stagger: key_stagger
           key:
-            col_net: P19
+            col_net: P4
         ring:
           stagger: key_stagger
           key:
-            col_net: P18
+            col_net: P5
         middle:
           stagger: key_stagger
           key:
-            col_net: P17
+            col_net: P6
         index:
           stagger: -key_stagger
           key:
-            col_net: P16
+            col_net: P7
         inner:
           stagger: -key_stagger
           key:
-            col_net: P15
+            col_net: P8
     thumbcluster:
       anchor:
         ref: matrix_index_lower
@@ -95,16 +95,16 @@ points:
       columns:
         near:
           key:
-            col_net: P17
+            col_net: P6
         home:
           key:
-            col_net: P16
+            col_net: P7
         far:
           key:
-            col_net: P15
+            col_net: P8
       rows:
         thumb:
-          row_net: P8
+          row_net: P9
           tags:
             1u: false
             15u: true
