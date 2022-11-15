@@ -1,9 +1,12 @@
 {
 	"scripts": {
-		"patch-footprints": "cp ./footprints/* ./node_modules/ergogen/src/footprints/ ",
-		"gen": "ergogen ./config/chevron-split.yaml"
+		"patch-footprints": "shx cp ./footprints/* ./node_modules/ergogen/src/footprints/ ",
+		"gen": "ergogen ./config/layout.yaml -o ./output"
 	},
 	"dependencies": {
-		"ergogen": "^3.1.0"
+		"ergogen": "^3.0.0"
+	},
+	"devDependencies": {
+		"shx": "^0.3.4"
 	}
 }
