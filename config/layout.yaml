@@ -19,7 +19,7 @@ units:
   rot_offset_x: -7     # horizontal offset from far thumb key where the rotary encoder sits
   rot_offset_y: 30     # distance from the thumb-key centerline where the rotary encoder sits
   # hardware dimensions
-  screw_ring: 0.8      # M1.6 screw is 1.6mm in diameter (circle of 0.8mm radius)
+  screw_ring: 1        # M2 screw is 2.0mm in diameter
   mcu_width: 17.78     # Elite-C footprint is 0.70" in width
   mcu_height: 33.02    # Elite-C footprint is 1.30" in height
   mcu_port: 34.544     # Elite-C with USB port is 1.37" from edge to edge
