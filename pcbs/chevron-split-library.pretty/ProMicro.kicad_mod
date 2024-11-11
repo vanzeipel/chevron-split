@@ -1,0 +1,371 @@
+(footprint "ProMicro"
+	(version 20240108)
+	(generator "pcbnew")
+	(generator_version "8.0")
+	(layer "F.Cu")
+	(property "Reference" "REF**"
+		(at 0 0 105)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "d26e8f49-bc1d-4322-ae00-8d8589d79e2d")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Value" "Val**"
+		(at 0 0 105)
+		(layer "F.SilkS")
+		(hide yes)
+		(uuid "0a769b6d-25b0-4fdc-a16c-b97a18b13e0e")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Footprint" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "3f902912-2a5f-4ee0-9986-50dfbc896e6d")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Datasheet" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "fbe23478-758d-4d5c-a230-53f5f16a7cd6")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(property "Description" ""
+		(at 0 0 0)
+		(layer "F.Fab")
+		(hide yes)
+		(uuid "64ed8919-5d32-45f5-a20d-cb8f673804ba")
+		(effects
+			(font
+				(size 1.27 1.27)
+				(thickness 0.15)
+			)
+		)
+	)
+	(attr through_hole)
+	(fp_line
+		(start -19.304 -3.81)
+		(end -14.224 -3.81)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "14b69ab0-f580-4300-94bf-072e209edd01")
+	)
+	(fp_line
+		(start -19.304 3.81)
+		(end -19.304 -3.81)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "7f3af14e-81e7-4631-bae8-4edc1934611a")
+	)
+	(fp_line
+		(start -14.224 -3.81)
+		(end -14.224 3.81)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "c2e013e7-84ef-4dd7-80ad-730c8a5ca324")
+	)
+	(fp_line
+		(start -14.224 3.81)
+		(end -19.304 3.81)
+		(stroke
+			(width 0.15)
+			(type solid)
+		)
+		(layer "Dwgs.User")
+		(uuid "df3888bc-44a6-448f-b370-244598c22c06")
+	)
+	(fp_text user "P10"
+		(at 13.97 4.6 90)
+		(layer "F.SilkS")
+		(uuid "02456980-364e-4932-b720-68935e09a5fa")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P20"
+		(at -1.27 4.6 90)
+		(layer "F.SilkS")
+		(uuid "0a4830e9-a30b-42e6-b2bc-a35f4014089a")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P16"
+		(at 11.43 4.6 90)
+		(layer "F.SilkS")
+		(uuid "10bfa6d4-5b1a-49b9-9e6d-b503ec3470ce")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "RST"
+		(at -8.89 4.6 90)
+		(layer "F.SilkS")
+		(uuid "2d35c26d-83ab-4b26-aa13-bf9e2966c18c")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "GND"
+		(at -6.35 -4.6 90)
+		(layer "F.SilkS")
+		(uuid "2d59d516-66ec-4bde-8870-d960a92c0ad6")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P02"
+		(at -3.81 -4.6 90)
+		(layer "F.SilkS")
+		(uuid "33668daf-8c02-4bfd-a443-c7f2d043db0e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P21"
+		(at -3.81 4.6 90)
+		(layer "F.SilkS")
+		(uuid "3c093d33-4ba5-4c02-8333-f6a8f94d7536")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P18"
+		(at 3.81 4.6 90)
+		(layer "F.SilkS")
+		(uuid "6478be23-71b2-4041-a830-981c36310c6e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "GND"
+		(at -11.43 4.6 90)
+		(layer "F.SilkS")
+		(uuid "6c4ba166-211a-43a8-a043-31e42a413a88")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P06"
+		(at 6.35 -4.6 90)
+		(layer "F.SilkS")
+		(uuid "86862391-4f80-416a-9edf-11f6f6f60247")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P00"
+		(at -11.43 -4.6 90)
+		(layer "F.SilkS")
+		(uuid "8bcb9958-5327-4d3f-bd94-55e69fed2092")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P05"
+		(at 3.81 -4.6 90)
+		(layer "F.SilkS")
+		(uuid "9cd3b1cb-8fb3-4faa-a6cb-e46f42295be7")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P19"
+		(at 1.27 4.6 90)
+		(layer "F.SilkS")
+		(uuid "9e0b9663-7428-45e5-973d-1aa9fa46b7af")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P03"
+		(at -1.27 -4.6 90)
+		(layer "F.SilkS")
+		(uuid "ab82af00-aebb-4f97-896a-41a27853d1c7")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P15"
+		(at 6.35 4.6 90)
+		(layer "F.SilkS")
+		(uuid "acb63cb8-9b16-42fb-802f-d92195a31c5f")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P04"
+		(at 1.27 -4.6 90)
+		(layer "F.SilkS")
+		(uuid "b75645bf-6dda-4feb-bf19-1738b48ea213")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P08"
+		(at 11.43 -4.6 90)
+		(layer "F.SilkS")
+		(uuid "be396ab9-83bf-4fdc-bf98-6409ac8f4f8e")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "RAW"
+		(at -13.97 4.6 90)
+		(layer "F.SilkS")
+		(uuid "bf6db04f-02fc-48e3-b7a0-84f49f7d6bcc")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "GND"
+		(at -8.89 -4.6 90)
+		(layer "F.SilkS")
+		(uuid "c27df416-053e-4574-a98f-20d2292a6720")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P14"
+		(at 8.89 4.6 90)
+		(layer "F.SilkS")
+		(uuid "cdeca0df-ff1f-48e1-bae4-2ee6eb0151d9")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P01"
+		(at -13.97 -4.6 90)
+		(layer "F.SilkS")
+		(uuid "d5b0ef22-b439-4bc6-b58a-0e83797f8196")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "VCC"
+		(at -6.35 4.6 90)
+		(layer "F.SilkS")
+		(uuid "ddb220e7-91d1-433e-8fe8-d171803e5182")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P09"
+		(at 13.97 -4.6 90)
+		(layer "F.SilkS")
+		(uuid "ee239b4e-2b6c-48cc-9847-667c93ea984d")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+	(fp_text user "P07"
+		(at 8.89 -4.6 90)
+		(layer "F.SilkS")
+		(uuid "ee645805-8b52-4702-b996-0342429944fd")
+		(effects
+			(font
+				(size 1 1)
+				(thickness 0.15)
+			)
+		)
+	)
+)
